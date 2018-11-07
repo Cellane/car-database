@@ -32,6 +32,10 @@ public class Car {
         this.owner = owner;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getBrand() {
         return brand;
     }

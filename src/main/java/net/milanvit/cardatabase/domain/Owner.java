@@ -26,6 +26,10 @@ public class Owner {
         this.lastName = lastName;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }

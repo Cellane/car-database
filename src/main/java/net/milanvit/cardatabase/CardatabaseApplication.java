@@ -1,10 +1,6 @@
 package net.milanvit.cardatabase;
 
-import net.milanvit.cardatabase.domain.Car;
-import net.milanvit.cardatabase.domain.CarRepository;
-import net.milanvit.cardatabase.domain.Owner;
-import net.milanvit.cardatabase.domain.OwnerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.milanvit.cardatabase.domain.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,11 +8,15 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class CardatabaseApplication {
-    @Autowired
-    private CarRepository repository;
+    private final CarRepository repository;
+    private final OwnerRepository ownerRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private OwnerRepository ownerRepository;
+    public CardatabaseApplication(CarRepository repository, OwnerRepository ownerRepository, UserRepository userRepository) {
+        this.repository = repository;
+        this.ownerRepository = ownerRepository;
+        this.userRepository = userRepository;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(CardatabaseApplication.class, args);
@@ -36,6 +36,9 @@ public class CardatabaseApplication {
 
             car = new Car("Toyota", "Prius", "Silver", "KKO-0212", 2018, 39000, owner2);
             repository.save(car);
+
+            userRepository.save(new User("Cellane", "$2a$10$i6SllusxMmb.cKAVbtaia.OYVQY90mMZiyiOvgp/TG/CVHAgWiDPa", "ADMIN"));
+            userRepository.save(new User("Voilane", "$2a$10$i6SllusxMmb.cKAVbtaia.OYVQY90mMZiyiOvgp/TG/CVHAgWiDPa", "USER"));
         };
     }
 }
